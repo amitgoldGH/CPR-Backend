@@ -1,10 +1,13 @@
 package CPR.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
@@ -16,14 +19,14 @@ import CPR.Data.SessionConverter;
 import CPR.Data.SessionEntity;
 
 @Service
-public class SessionServiceImpl implements SessionService{
+public class SessionServiceImplMockup implements SessionService{
 
 	private Map<String, SessionEntity> storage;
 	private SessionConverter converter;
 	private AtomicLong counter;
 	
 	@Autowired
-	public SessionServiceImpl(SessionConverter converter) {
+	public SessionServiceImplMockup(SessionConverter converter) {
 		this.converter = converter;
 	}
 	
@@ -38,49 +41,97 @@ public class SessionServiceImpl implements SessionService{
 	}
 	@Override
 	public Object createSession(SessionBoundary session) {
-		// TODO Auto-generated method stub
+		if (session.getUsername() != null) {
+			SessionEntity entity = converter.convertToEntity(session);
+			entity.setCreation_Date(new Date());
+			entity.setSession_Id(String.valueOf(counter.getAndIncrement()));
+			storage.put(entity.getSession_Id(), entity);
+			System.out.println("Created and stored session in memory successfully.");
+			
+			return converter.convertToBoundary(entity);
+		}
+		else {
+			// TODO: Invalid username
+		}
 		return null;
 	}
 
 	@Override
 	public List<Object> getAllSessions() {
-		// TODO Auto-generated method stub
-		return null;
+		return storage.values().stream().parallel().map(converter::convertToBoundary).collect(Collectors.toList());
 	}
+	
 
 	@Override
 	public List<Object> getAllSessionsByUser(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Object> filteredList = new ArrayList<Object>();
+		
+		for (SessionEntity entity : storage.values().stream().parallel().collect(Collectors.toList())) {
+			if (entity.getUsername().equalsIgnoreCase(username))
+				filteredList.add(converter.convertToBoundary(entity));
+		}
+		
+		return filteredList;
 	}
 
 	@Override
 	public Object getSessionById(String session_Id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (session_Id != null & storage.get(session_Id) != null)
+			return converter.convertToBoundary(storage.get(session_Id));
+		else // TODO EXCEPTION SESSION NOT FOUND
+			return null;
 	}
 
 	@Override
 	public void updateSession(SessionBoundary session) {
-		// TODO Auto-generated method stub
+		if (session.getSession_Id() != null && session.getUsername() != null)
+		{
+			if (storage.get(session.getSession_Id()) != null)
+			{
+				storage.put(session.getSession_Id(), converter.convertToEntity(session));
+				System.out.println("Update sample success, sample_id: " + session.getSession_Id() + " updated.");
+				
+			}
+			else 
+			{
+				// TODO: Exception existing session with same id doesnt exist.
+			}
+		}
+		else
+		{
+			// TODO: Exception, invalid session
+		}
 		
 	}
 
 	@Override
 	public void deleteAllSessions() {
-		// TODO Auto-generated method stub
+		storage.clear();
+		System.out.println("Session storage cleared");
 		
 	}
 
 	@Override
 	public void deleteSessionById(String session_Id) {
-		// TODO Auto-generated method stub
+		if (storage.get(session_Id) != null)
+			storage.remove(session_Id);
+		else
+			System.out.println("Session doesnt exist");
+		// TODO Exception for session not found
 		
 	}
 
 	@Override
 	public void deleteSessionByUsername(String username) {
-		// TODO Auto-generated method stub
+		int delCounter = 0;
+		for (SessionEntity entity : storage.values().stream().parallel().collect(Collectors.toList())) {
+			if (entity.getUsername().equalsIgnoreCase(username))
+			{
+				storage.remove(entity.getSession_Id());
+				delCounter++;
+			}
+		}
+		System.out.println("Delete session by username: " + username + ", Deleted " + delCounter + " sessions.");
 		
 	}
 
