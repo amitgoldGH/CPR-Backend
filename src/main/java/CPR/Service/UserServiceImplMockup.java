@@ -17,14 +17,14 @@ import CPR.Data.UserConverter;
 import CPR.Data.UserEntity;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImplMockup implements UserService{
 
 	private Map<String, UserEntity> storage;
 	private UserConverter converter;
 	private AtomicLong counter;
 	
 	@Autowired
-	public UserServiceImpl(UserConverter converter) {
+	public UserServiceImplMockup(UserConverter converter) {
 		this.converter = converter;
 	}
 	
