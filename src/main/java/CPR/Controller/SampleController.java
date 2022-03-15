@@ -22,7 +22,7 @@ public class SampleController {
 	}
 	
 	//POST request, path="/api/samples"
-	//Accept: Sample Boundary
+	//Accept: Sample Boundary with null sample id
 	//Return: SampleBoundary
 	@RequestMapping(
 			path = "/api/samples",
