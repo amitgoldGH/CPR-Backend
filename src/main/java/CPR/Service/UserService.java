@@ -1,5 +1,7 @@
 package CPR.Service;
 
+import org.springframework.stereotype.Service;
+
 import CPR.Boundary.NewUserBoundary;
 import CPR.Boundary.UserBoundary;
 

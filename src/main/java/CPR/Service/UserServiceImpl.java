@@ -2,10 +2,13 @@ package CPR.Service;
 
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import CPR.Boundary.NewUserBoundary;
 import CPR.Boundary.UserBoundary;
 import CPR.Data.UserEntity;
 
+@Service
 public class UserServiceImpl implements UserService{
 
 	private Map<String, UserEntity> storage;

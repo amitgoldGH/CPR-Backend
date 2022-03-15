@@ -2,9 +2,12 @@ package CPR.Service;
 
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import CPR.Boundary.SampleBoundary;
 import CPR.Data.SampleEntity;
 
+@Service
 public class SampleServiceImpl implements SampleService {
 
 	private Map<String, SampleEntity> storage;

@@ -2,9 +2,12 @@ package CPR.Service;
 
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import CPR.Boundary.SessionBoundary;
 import CPR.Data.SessionEntity;
 
+@Service
 public class SessionServiceImpl implements SessionService{
 
 	private Map<String, SessionEntity> storage;

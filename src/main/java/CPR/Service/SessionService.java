@@ -1,6 +1,9 @@
 package CPR.Service;
 
+import org.springframework.stereotype.Service;
+
 import CPR.Boundary.SessionBoundary;
+
 
 public interface SessionService {
 
