@@ -1,5 +1,25 @@
 package CPR.Service;
 
-public class UserService {
+import CPR.Boundary.NewUserBoundary;
+import CPR.Boundary.UserBoundary;
 
+public interface UserService {
+	
+	//CREATE
+	public Object createUser(NewUserBoundary new_User_Boundary);
+	
+	//RETRIEVE
+	public Object login(UserBoundary user_Boundary);
+	
+	public Object getUser(String username);
+	
+	public Object[] getAllUsers();
+	
+	//UPDATE
+	public void updateUser(UserBoundary user_Boundary);
+	
+	//DELETE
+	public void deleteAllUsers();
+	
+	public void deleteUser(String username);
 }
