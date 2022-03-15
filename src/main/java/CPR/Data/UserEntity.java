@@ -6,6 +6,8 @@ public class UserEntity {
 	private String username;
 	private String password; // Needs to be hashed.
 	
+	public UserEntity() {}
+	
 	public UserEntity(String username, String hashed_Password)
 	{
 		super();
@@ -29,5 +31,10 @@ public class UserEntity {
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+		return "UserEntity [username=" + username + ", password=" + password + "]";
+	}
 
+	
 }
