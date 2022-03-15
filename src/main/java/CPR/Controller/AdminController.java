@@ -32,12 +32,12 @@ public class AdminController {
 	
 	//GET request, path="/api/users"
 	//Accept: Nothing
-	//Return: Array of all users in database
+	//Return: List of all users in database
 	@RequestMapping(
 			path="/api/users",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public Object[] getAllUsers() {
+	public List<Object> getAllUsers() {
 		System.out.println("ADMIN_CONTROLLER /api/users GET ALL USERS TYPE_GET called");
 		
 		return userService.getAllUsers();
@@ -78,12 +78,12 @@ public class AdminController {
 	
 	//GET request, path="/api/sessions"
 	//Accept: Nothing
-	//Return array of all sessions in database
+	//Return List of all sessions in database
 	@RequestMapping(
 			path = "/api/sessions",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public Object[] getAllSessions() {
+	public List<Object> getAllSessions() {
 		System.out.println("ADMIN_CONTROLLER /api/sessions GET ALL SESSIONS TYPE_GET called");
 		
 		return this.sessionService.getAllSessions();
@@ -93,12 +93,12 @@ public class AdminController {
 	
 	//GET request, path="/api/sessions/user/{username}"
 	//Accept: Nothing
-	//Return array of all sessions in database related to that username.
+	//Return List of all sessions in database related to that username.
 	@RequestMapping(
 			path = "/api/sessions/user/{username}",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public Object[] getAllSessionsByUser(@PathVariable("username") String username) {
+	public List<Object> getAllSessionsByUser(@PathVariable("username") String username) {
 		System.out.println("ADMIN_CONTROLLER /api/sessions/user/" +username + " GET ALL SESSIONS BY USER TYPE_GET called");
 		
 		return this.sessionService.getAllSessionsByUser(username);

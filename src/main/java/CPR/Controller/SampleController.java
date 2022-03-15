@@ -1,5 +1,7 @@
 package CPR.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +32,7 @@ public class SampleController {
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Object createSample(@RequestBody SampleBoundary sample) {
-		System.out.println("SAMPLE_CONTROLLER /api/samples CREATE SAMPLE TYPE_POST called " + sample.toString());
+		System.out.println("SAMPLE_CONTROLLER /api/samples CREATE SAMPLE TYPE_POST called");
 		return this.sampleService.createSample(sample);
 		
 		//return sample; // TODO: Return sample via service
@@ -38,12 +40,12 @@ public class SampleController {
 	
 	//GET request, path="/api/samples/session/{id}"
 	//Accept: None
-	//Return: SampleBoundary array
+	//Return: SampleBoundary list
 	@RequestMapping(
 			path="/api/samples/session/{sessionId}",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-		public Object[] retrieveAllSessionSamples(
+		public List<Object> retrieveAllSessionSamples(
 				@PathVariable("sessionId") String session_Id){
 			System.out.println("SAMPLE_CONTROLLER /api/samples/session/" + session_Id + " RETRIEVE ALL SAMPLES OF GIVEN SESSION ID TYPE_GET called");
 			return this.sampleService.retrieveAllSessionSamples(session_Id);

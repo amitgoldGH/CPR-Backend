@@ -1,5 +1,7 @@
 package CPR.Service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import CPR.Boundary.SessionBoundary;
@@ -11,9 +13,9 @@ public interface SessionService {
 	public Object createSession(SessionBoundary session);
 	
 	// RETRIVE
-	public Object[] getAllSessions();
+	public List<Object> getAllSessions();
 	
-	public Object[] getAllSessionsByUser(String username);
+	public List<Object> getAllSessionsByUser(String username);
 	
 	public Object getSessionById(String session_Id);
 	

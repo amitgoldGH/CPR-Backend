@@ -1,5 +1,7 @@
 package CPR.Service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import CPR.Boundary.NewUserBoundary;
@@ -15,7 +17,7 @@ public interface UserService {
 	
 	public Object getUser(String username);
 	
-	public Object[] getAllUsers();
+	public List<Object> getAllUsers();
 	
 	//UPDATE
 	public void updateUser(UserBoundary user_Boundary);

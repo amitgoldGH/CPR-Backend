@@ -1,5 +1,7 @@
 package CPR.Service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,9 +14,9 @@ public interface SampleService {
 	public Object createSample(SampleBoundary sample);
 	
 	//RETRIEVE
-	public Object[] retrieveAllSessionSamples(String session_Id);
+	public List<Object> retrieveAllSessionSamples(String session_Id);
 	
-	public Object[] getAllSamples();
+	public List<Object> getAllSamples();
 	
 	//UPDATE
 	public void updateSample(SampleBoundary sample);
