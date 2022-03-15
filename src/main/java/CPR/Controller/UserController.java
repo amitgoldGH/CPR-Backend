@@ -1,5 +1,6 @@
 package CPR.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,9 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import CPR.Boundary.NewUserBoundary;
 import CPR.Boundary.UserBoundary;
+import CPR.Service.UserService;
 
 @RestController
 public class UserController {
+	
+	private UserService userService;
+	
+	@Autowired
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
 	
 	//POST request, path="/api/users"
 	//Accept: NewUserBoundary
@@ -23,8 +32,10 @@ public class UserController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object createUser(@RequestBody NewUserBoundary new_User_Boundary) {
 		System.out.println("USER_CONTROLLER /api/users CREATE USER TYPE_POST called " + new_User_Boundary.toString());
-		return new_User_Boundary;
 		
+		return this.userService.createUser(new_User_Boundary);
+		
+		//return new_User_Boundary;
 		// TODO: Implement creating user
 	}
 	
@@ -38,7 +49,10 @@ public class UserController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object login(@RequestBody UserBoundary user_Boundary) {
 		System.out.println("USER_CONTROLLER /api/users/login LOGIN TYPE_POST called LOGIN INFO: " + user_Boundary.toString());
-		return user_Boundary;
+		
+		return this.userService.login(user_Boundary);
+		
+		//return user_Boundary;
 		// TODO: IMPLEMENT LOGIN
 	}
 	
@@ -51,8 +65,10 @@ public class UserController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object getUser(@PathVariable("username") String username) {
 		System.out.println("USER_CONTROLLER /api/users/" + username + " GET USER TYPE_GET called");
-		return new NewUserBoundary(username, "passwordstub");
 		
+		return this.userService.getUser(username);
+		
+		//return new NewUserBoundary(username, "passwordstub");
 		// TODO: Implement get user
 	}
 	
@@ -65,6 +81,7 @@ public class UserController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateUser(@RequestBody UserBoundary user_Boundary) {
 		System.out.println("USER_CONTROLLER /api/users UPDATE USER TYPE_PUT called " + user_Boundary.toString());
+		this.userService.updateUser(user_Boundary);
 		
 		//  TODO: Implement update user
 	}

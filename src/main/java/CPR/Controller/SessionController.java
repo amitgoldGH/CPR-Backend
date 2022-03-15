@@ -2,6 +2,7 @@ package CPR.Controller;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,10 +11,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import CPR.Boundary.SessionBoundary;
+import CPR.Service.SessionService;
 
 @RestController
 public class SessionController {
 	
+	private SessionService sessionService;
+	
+	@Autowired
+	public SessionController(SessionService sessionService) {
+		this.sessionService = sessionService;
+	}
 	
 	//POST request, path="/api/sessions"
 	//Accept: SessionBoundary
@@ -25,7 +33,10 @@ public class SessionController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object createSession(@RequestBody SessionBoundary session) {
 		System.out.println("SESSION_CONTROLLER /api/sessions CREATE SESSION TYPE_POST called " + session.toString());
-		return session;
+		
+		return this.sessionService.createSession(session);
+
+		//return session;
 		// TODO CREATE SESSION
 	}
 	
@@ -38,7 +49,10 @@ public class SessionController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object getSessionById(@PathVariable("id") String session_Id) {
 		System.out.println("SESSION_CONTROLLER /api/sessions/" + session_Id + " GET SESSION BY ID TYPE_GET called");
-		return new SessionBoundary(session_Id, "borat", new String[]{"Measure1","Measure2"}, new Date()); 
+		
+		return this.sessionService.getSessionById(session_Id);
+		
+		//return new SessionBoundary(session_Id, "borat", new String[]{"Measure1","Measure2"}, new Date()); 
 		// TODO: RETURN ALL SESSION BY ID
 	}
 	
@@ -51,6 +65,9 @@ public class SessionController {
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateSession(@RequestBody SessionBoundary session) {
 		System.out.println("SESSION_CONTROLLER /api/sessions UPDATE SESSION TYPE_PUT called " + session.toString());
+		
+		this.sessionService.updateSession(session);
+		
 		// TODO: Implement updating.
 	}
 }
