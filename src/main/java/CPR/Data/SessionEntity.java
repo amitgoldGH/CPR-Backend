@@ -1,5 +1,6 @@
 package CPR.Data;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class SessionEntity {
@@ -7,6 +8,8 @@ public class SessionEntity {
 	private String username;
 	private String[] measurement_Summary; // Calculated at end of session.
 	private Date creation_Date;
+	
+	public SessionEntity() {}
 	
 	public SessionEntity(String session_Id, String username, String[] measurement_Summary, Date creation_Date)
 	{
@@ -46,6 +49,12 @@ public class SessionEntity {
 	}
 	public void setCreation_Date(Date creation_Date) {
 		this.creation_Date = creation_Date;
+	}
+
+	@Override
+	public String toString() {
+		return "SessionEntity [session_Id=" + session_Id + ", username=" + username + ", measurement_Summary="
+				+ Arrays.toString(measurement_Summary) + ", creation_Date=" + creation_Date + "]";
 	}
 	
 	
