@@ -41,9 +41,6 @@ public class AdminController {
 		System.out.println("ADMIN_CONTROLLER /api/users GET ALL USERS TYPE_GET called");
 		
 		return userService.getAllUsers();
-		
-		//return new UserBoundary[0];
-		// TODO: IMPLEMENT GET ALL USERS
 	}
 	
 	//DELETE request, path="/api/users"
@@ -56,8 +53,6 @@ public class AdminController {
 		System.out.println("ADMIN_CONTROLLER /api/users DELETE ALL USERS TYPE_DELETE called");
 		
 		this.userService.deleteAllUsers();
-		
-		// TODO: Implement delete all users
 	}
 	
 	//DELETE request, path="/api/users/{username}"
@@ -70,8 +65,6 @@ public class AdminController {
 		System.out.println("ADMIN_CONTROLLER /api/users/" + username + " DELETE USER TYPE_DELETE called");
 		
 		this.userService.deleteUser(username);
-		
-		// TODO: Implement delete user by username
 	}
 	
 	
@@ -86,9 +79,7 @@ public class AdminController {
 	public List<Object> getAllSessions() {
 		System.out.println("ADMIN_CONTROLLER /api/sessions GET ALL SESSIONS TYPE_GET called");
 		
-		return this.sessionService.getAllSessions();
-		
-		//return new SessionBoundary[0]; // TODO: RETURN ALL SESSIONS
+		return this.sessionService.getAllSessions();	
 	}
 	
 	//GET request, path="/api/sessions/user/{username}"
@@ -103,7 +94,6 @@ public class AdminController {
 		
 		return this.sessionService.getAllSessionsByUser(username);
 		
-		//return new SessionBoundary[0]; // TODO: RETURN ALL SESSIONS BY USERNAME
 	}
 	
 	//DELETE request, path="/api/sessions"
@@ -116,7 +106,6 @@ public class AdminController {
 		System.out.println("ADMIN_CONTROLLER /api/sessions DELETE ALL SESSIONS TYPE_DELETE called");
 
 		this.sessionService.deleteAllSessions();
-		//TODO: IMPLEMENT  DELETE ALL SESSIONS
 	}
 	
 	//DELETE request, path="/api/sessions/{id}"
@@ -129,7 +118,6 @@ public class AdminController {
 		System.out.println("ADMIN_CONTROLLER /api/sessions/" + session_Id + " DELETE SESSION BY ID TYPE_DELETE called");
 		
 		this.sessionService.deleteSessionById(session_Id);
-		// TODO: IMPLEMENT  DELETE SESSION BY ID
 	}
 	
 	//DELETE request, path="/api/sessions/user/{username}"
@@ -142,8 +130,6 @@ public class AdminController {
 		System.out.println("ADMIN_CONTROLLER /api/sessions/user/" + username + " DELETE SESSION BY USERNAME TYPE_DELETE called");
 		
 		this.sessionService.deleteSessionByUsername(username);
-		
-		// TODO: IMPLEMENT  DELETE SESSION BY USERNAME
 	}
 	
 	
@@ -158,8 +144,6 @@ public class AdminController {
 		System.out.println("ADMIN_CONTROLLER /api/samples GET ALL SAMPLES TYPE_GET called");
 		
 		return this.sampleService.getAllSamples();
-		
-		//return new SampleBoundary[0]; // TODO: RETURN ALL SAMPLES
 	}
 	
 	//DELETE request, path="/api/samples"
@@ -172,8 +156,6 @@ public class AdminController {
 		System.out.println("ADMIN_CONTROLLER /api/samples DELETE ALL SAMPLES TYPE_DELETE called");
 		
 		this.sampleService.deleteAllSamples();
-		
-		// TODO: Delete all samples
 	}
 	
 	//DELETE request, path="/api/samples/{id}"
@@ -186,7 +168,6 @@ public class AdminController {
 		System.out.println("ADMIN_CONTROLLER /api/samples/" + sample_Id + " DELETE SAMPLE BY ID TYPE_DELETE called");
 		
 		this.sampleService.deleteSample(sample_Id);
-		// TODO: Delete sample by id.
 	}
 		
 }

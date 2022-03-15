@@ -10,16 +10,13 @@ public class SessionBoundary {
 	private String[] measurement_Summary; // Calculated at end of session.
 	private Date creation_Date;
 	
-	public SessionBoundary() {
-		// TODO Auto-generated constructor stub
-	}
+	public SessionBoundary() {}
 	
 	public SessionBoundary(String session_Id, String username, String[] measurement_Summary, Date creation_Date) {
 		this.setSession_Id(session_Id);
 		this.setUsername(username);
 		this.setMeasurement_Summary(measurement_Summary);
 		this.setCreation_Date(creation_Date);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public String getSession_Id() {

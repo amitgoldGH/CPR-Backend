@@ -35,9 +35,6 @@ public class SessionController {
 		System.out.println("SESSION_CONTROLLER /api/sessions CREATE SESSION TYPE_POST called " + session.toString());
 		
 		return this.sessionService.createSession(session);
-
-		//return session;
-		// TODO CREATE SESSION
 	}
 	
 	//GET request, path="/api/sessions/{id}"
@@ -51,9 +48,6 @@ public class SessionController {
 		System.out.println("SESSION_CONTROLLER /api/sessions/" + session_Id + " GET SESSION BY ID TYPE_GET called");
 		
 		return this.sessionService.getSessionById(session_Id);
-		
-		//return new SessionBoundary(session_Id, "borat", new String[]{"Measure1","Measure2"}, new Date()); 
-		// TODO: RETURN ALL SESSION BY ID
 	}
 	
 	//PUT request, path="/api/sessions"
@@ -67,7 +61,5 @@ public class SessionController {
 		System.out.println("SESSION_CONTROLLER /api/sessions UPDATE SESSION TYPE_PUT called " + session.toString());
 		
 		this.sessionService.updateSession(session);
-		
-		// TODO: Implement updating.
 	}
 }

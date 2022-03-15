@@ -6,9 +6,7 @@ public class NewUserBoundary {
 	private String password;
 	
 	
-	public NewUserBoundary() {
-		// TODO Auto-generated constructor stub
-	}
+	public NewUserBoundary() {}
 	
 	public NewUserBoundary(String username, String password) {
 		this.setUsername(username);

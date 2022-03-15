@@ -34,9 +34,6 @@ public class UserController {
 		System.out.println("USER_CONTROLLER /api/users CREATE USER TYPE_POST called " + new_User_Boundary.toString());
 		
 		return this.userService.createUser(new_User_Boundary);
-		
-		//return new_User_Boundary;
-		// TODO: Implement creating user
 	}
 	
 	//POST request, path="/api/users/login"
@@ -51,9 +48,6 @@ public class UserController {
 		System.out.println("USER_CONTROLLER /api/users/login LOGIN TYPE_POST called LOGIN INFO: " + user_Boundary.toString());
 		
 		return this.userService.login(user_Boundary);
-		
-		//return user_Boundary;
-		// TODO: IMPLEMENT LOGIN
 	}
 	
 	//GET request, path="/api/users/{username}"
@@ -67,9 +61,6 @@ public class UserController {
 		System.out.println("USER_CONTROLLER /api/users/" + username + " GET USER TYPE_GET called");
 		
 		return this.userService.getUser(username);
-		
-		//return new NewUserBoundary(username, "passwordstub");
-		// TODO: Implement get user
 	}
 	
 	//PUT request, path="/api/users"
@@ -82,7 +73,5 @@ public class UserController {
 	public void updateUser(@RequestBody UserBoundary user_Boundary) {
 		System.out.println("USER_CONTROLLER /api/users UPDATE USER TYPE_PUT called " + user_Boundary.toString());
 		this.userService.updateUser(user_Boundary);
-		
-		//  TODO: Implement update user
 	}
 }

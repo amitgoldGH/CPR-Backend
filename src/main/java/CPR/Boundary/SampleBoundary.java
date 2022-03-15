@@ -7,15 +7,12 @@ public class SampleBoundary {
 	private String session_Id;
 	private String[] measurements;
 	
-	public SampleBoundary() {
-		// TODO Auto-generated constructor stub
-	}
+	public SampleBoundary() {}
 	
 	public SampleBoundary(String sample_Id, String session_Id, String[] measurements) {
 		this.setSample_Id(sample_Id);
 		this.setSession_Id(session_Id);
 		this.setMeasurements(measurements);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public String getSample_Id() {

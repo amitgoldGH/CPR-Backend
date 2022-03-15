@@ -34,8 +34,6 @@ public class SampleController {
 	public Object createSample(@RequestBody SampleBoundary sample) {
 		System.out.println("SAMPLE_CONTROLLER /api/samples CREATE SAMPLE TYPE_POST called");
 		return this.sampleService.createSample(sample);
-		
-		//return sample; // TODO: Return sample via service
 	}
 	
 	//GET request, path="/api/samples/session/{id}"
@@ -49,9 +47,6 @@ public class SampleController {
 				@PathVariable("sessionId") String session_Id){
 			System.out.println("SAMPLE_CONTROLLER /api/samples/session/" + session_Id + " RETRIEVE ALL SAMPLES OF GIVEN SESSION ID TYPE_GET called");
 			return this.sampleService.retrieveAllSessionSamples(session_Id);
-			
-			//return new SampleBoundary[0]; // TODO: Return all samples with given session id
-			//return userService.login(userDomain, userEmail);
 		}
 	
 	//PUT request, path="/api/samples"
@@ -65,7 +60,5 @@ public class SampleController {
 	public void updateSample(@RequestBody SampleBoundary sample) {
 		System.out.println("SAMPLE_CONTROLLER /api/samples UPDATE SAMPLE TYPE_PUT called " + sample.toString());
 		this.sampleService.updateSample(sample);
-		
-		// TODO: Implement updating sample
 	}
 }
