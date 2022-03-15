@@ -1,5 +1,6 @@
 package CPR.Boundary;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class SessionBoundary {
@@ -45,6 +46,14 @@ public class SessionBoundary {
 	public void setCreation_Date(Date creation_Date) {
 		this.creation_Date = creation_Date;
 	}
+
+	@Override
+	public String toString() {
+		return "SessionBoundary [session_Id=" + session_Id + ", username=" + username + ", measurement_Summary="
+				+ Arrays.toString(measurement_Summary) + ", creation_Date=" + creation_Date + "]";
+	}
+	
+	
 	
 	
 }
