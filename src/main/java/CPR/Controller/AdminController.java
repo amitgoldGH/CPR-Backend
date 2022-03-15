@@ -22,7 +22,7 @@ public class AdminController {
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object[] getAllUsers() {
-		System.out.println("/api/users GET ALL USERS TYPE_GET called");
+		System.out.println("ADMIN_CONTROLLER /api/users GET ALL USERS TYPE_GET called");
 		return new UserBoundary[0];
 		// TODO: IMPLEMENT GET ALL USERS
 	}
@@ -34,7 +34,7 @@ public class AdminController {
 			path="/api/users",
 			method = RequestMethod.DELETE)
 	public void deleteAllUsers() {
-		System.out.println("/api/users DELETE ALL USERS TYPE_DELETE called");
+		System.out.println("ADMIN_CONTROLLER /api/users DELETE ALL USERS TYPE_DELETE called");
 		
 		// TODO: Implement delete all users
 	}
@@ -46,7 +46,7 @@ public class AdminController {
 			path="/api/users/{username}",
 			method = RequestMethod.DELETE)
 	public void deleteUser(@PathVariable("username") String username) {
-		System.out.println("/api/users/" + username + " DELETE USER TYPE_DELETE called");
+		System.out.println("ADMIN_CONTROLLER /api/users/" + username + " DELETE USER TYPE_DELETE called");
 		
 		// TODO: Implement delete user by username
 	}
@@ -61,7 +61,7 @@ public class AdminController {
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object[] getAllSessions() {
-		System.out.println("/api/sessions GET ALL SESSIONS TYPE_GET called");
+		System.out.println("ADMIN_CONTROLLER /api/sessions GET ALL SESSIONS TYPE_GET called");
 		return new SessionBoundary[0]; // TODO: RETURN ALL SESSIONS
 	}
 	
@@ -73,7 +73,7 @@ public class AdminController {
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object[] getAllSessionsByUser(@PathVariable("username") String username) {
-		System.out.println("/api/sessions/user/" +username + " GET ALL SESSIONS BY USER TYPE_GET called");
+		System.out.println("ADMIN_CONTROLLER /api/sessions/user/" +username + " GET ALL SESSIONS BY USER TYPE_GET called");
 		return new SessionBoundary[0]; // TODO: RETURN ALL SESSIONS BY USERNAME
 	}
 	
@@ -84,7 +84,7 @@ public class AdminController {
 			path = "/api/sessions",
 			method = RequestMethod.DELETE)
 	public void deleteAllSessions() {
-		System.out.println("/api/sessions DELETE ALL SESSIONS TYPE_DELETE called");
+		System.out.println("ADMIN_CONTROLLER /api/sessions DELETE ALL SESSIONS TYPE_DELETE called");
 		// TODO: IMPLEMENT  DELETE ALL SESSIONS
 		return;
 	}
@@ -96,7 +96,7 @@ public class AdminController {
 			path = "/api/sessions/{id}",
 			method = RequestMethod.DELETE)
 	public void deleteSessionById(@PathVariable("id") String session_Id) {
-		System.out.println("/api/sessions/" + session_Id + " DELETE SESSION BY ID TYPE_DELETE called");
+		System.out.println("ADMIN_CONTROLLER /api/sessions/" + session_Id + " DELETE SESSION BY ID TYPE_DELETE called");
 		// TODO: IMPLEMENT  DELETE SESSION BY ID
 		return;
 	}
@@ -108,7 +108,7 @@ public class AdminController {
 			path = "/api/sessions/user/{username}",
 			method = RequestMethod.DELETE)
 	public void deleteSessionByUsername(@PathVariable("username") String username) {
-		System.out.println("/api/sessions/user/" + username + " DELETE SESSION BY USERNAME TYPE_DELETE called");
+		System.out.println("ADMIN_CONTROLLER /api/sessions/user/" + username + " DELETE SESSION BY USERNAME TYPE_DELETE called");
 		// TODO: IMPLEMENT  DELETE SESSION BY USERNAME
 		return;
 	}
@@ -122,7 +122,7 @@ public class AdminController {
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object[] getAllSamples() {
-		System.out.println("/api/samples GET ALL SAMPLES TYPE_GET called");
+		System.out.println("ADMIN_CONTROLLER /api/samples GET ALL SAMPLES TYPE_GET called");
 		return new SampleBoundary[0]; // TODO: RETURN ALL SAMPLES
 	}
 	
@@ -133,7 +133,7 @@ public class AdminController {
 			path = "/api/samples",
 			method = RequestMethod.DELETE)
 	public void deleteAllSamples() {
-		System.out.println("/api/samples DELETE ALL SAMPLES TYPE_DELETE called");
+		System.out.println("ADMIN_CONTROLLER /api/samples DELETE ALL SAMPLES TYPE_DELETE called");
 		return; // TODO: Delete all samples
 	}
 	
@@ -144,7 +144,7 @@ public class AdminController {
 			path = "/api/samples/{id}",
 			method = RequestMethod.DELETE)
 	public void deleteSample(@PathVariable("id") String sample_Id) {
-		System.out.println("/api/samples/" + sample_Id + " DELETE SAMPLE BY ID TYPE_DELETE called");
+		System.out.println("ADMIN_CONTROLLER /api/samples/" + sample_Id + " DELETE SAMPLE BY ID TYPE_DELETE called");
 		return; // TODO: Delete sample by id.
 	}
 		

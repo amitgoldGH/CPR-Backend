@@ -22,7 +22,7 @@ public class SampleController {
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Object createSample(@RequestBody SampleBoundary sample) {
-		System.out.println("/api/samples CREATE SAMPLE TYPE_POST called " + sample.toString());
+		System.out.println("SAMPLE_CONTROLLER /api/samples CREATE SAMPLE TYPE_POST called " + sample.toString());
 		return sample; // TODO: Return sample via service
 	}
 	
@@ -35,7 +35,7 @@ public class SampleController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 		public Object[] retrieveAllSessionSamples(
 				@PathVariable("sessionId") String session_Id){
-			System.out.println("/api/samples/session/" + session_Id + " RETRIEVE ALL SAMPLES OF GIVEN SESSION ID TYPE_GET called");
+			System.out.println("SAMPLE_CONTROLLER /api/samples/session/" + session_Id + " RETRIEVE ALL SAMPLES OF GIVEN SESSION ID TYPE_GET called");
 			return new SampleBoundary[0]; // TODO: Return all samples with given session id
 			//return userService.login(userDomain, userEmail);
 		}
@@ -49,7 +49,7 @@ public class SampleController {
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public void updateSample(@RequestBody SampleBoundary sample) {
-		System.out.println("/api/samples UPDATE SAMPLE TYPE_PUT called " + sample.toString());
+		System.out.println("SAMPLE_CONTROLLER /api/samples UPDATE SAMPLE TYPE_PUT called " + sample.toString());
 		// TODO: Implement updating sample
 	}
 }
