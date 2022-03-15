@@ -24,7 +24,7 @@ public class SessionController {
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object createSession(@RequestBody SessionBoundary session) {
-		System.out.println("/api/sessions CREATE SESSION TYPE_POST called " + session.toString());
+		System.out.println("SESSION_CONTROLLER /api/sessions CREATE SESSION TYPE_POST called " + session.toString());
 		return session;
 		// TODO CREATE SESSION
 	}
@@ -37,7 +37,7 @@ public class SessionController {
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object getSessionById(@PathVariable("id") String session_Id) {
-		System.out.println("/api/sessions/" + session_Id + " GET SESSION BY ID TYPE_GET called");
+		System.out.println("SESSION_CONTROLLER /api/sessions/" + session_Id + " GET SESSION BY ID TYPE_GET called");
 		return new SessionBoundary(session_Id, "borat", new String[]{"Measure1","Measure2"}, new Date()); 
 		// TODO: RETURN ALL SESSION BY ID
 	}
@@ -48,10 +48,9 @@ public class SessionController {
 	@RequestMapping(
 			path = "/api/sessions",
 			method = RequestMethod.PUT,
-			consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateSession(@RequestBody SessionBoundary session) {
-		System.out.println("/api/sessions UPDATE SESSION TYPE_PUT called " + session.toString());
+		System.out.println("SESSION_CONTROLLER /api/sessions UPDATE SESSION TYPE_PUT called " + session.toString());
 		// TODO: Implement updating.
 	}
 }
