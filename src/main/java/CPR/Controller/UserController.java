@@ -22,10 +22,24 @@ public class UserController {
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object createUser(@RequestBody NewUserBoundary new_User_Boundary) {
-		System.out.println("/api/users CREATE USER TYPE_POST called " + new_User_Boundary.toString());
+		System.out.println("USER_CONTROLLER /api/users CREATE USER TYPE_POST called " + new_User_Boundary.toString());
 		return new_User_Boundary;
 		
 		// TODO: Implement creating user
+	}
+	
+	//POST request, path="/api/users/login"
+	//Accept: UserBoundary
+	//Return: Object
+	@RequestMapping(
+			path="/api/users/login",
+			method = RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public Object login(@RequestBody UserBoundary user_Boundary) {
+		System.out.println("USER_CONTROLLER /api/users/login LOGIN TYPE_POST called LOGIN INFO: " + user_Boundary.toString());
+		return user_Boundary;
+		// TODO: IMPLEMENT LOGIN
 	}
 	
 	//GET request, path="/api/users/{username}"
@@ -36,7 +50,7 @@ public class UserController {
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public Object getUser(@PathVariable("username") String username) {
-		System.out.println("/api/users/" + username + " GET USER TYPE_GET called");
+		System.out.println("USER_CONTROLLER /api/users/" + username + " GET USER TYPE_GET called");
 		return new NewUserBoundary(username, "passwordstub");
 		
 		// TODO: Implement get user
@@ -45,9 +59,12 @@ public class UserController {
 	//PUT request, path="/api/users"
 	//Accept: Updated UserBoundary of existing user
 	//Return: Nothing
-	@RequestMapping()
+	@RequestMapping(
+			path="/api/users",
+			method = RequestMethod.PUT,
+			consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateUser(@RequestBody UserBoundary user_Boundary) {
-		System.out.println("/api/users UPDATE USER TYPE_PUT called " + user_Boundary.toString());
+		System.out.println("USER_CONTROLLER /api/users UPDATE USER TYPE_PUT called " + user_Boundary.toString());
 		
 		//  TODO: Implement update user
 	}
