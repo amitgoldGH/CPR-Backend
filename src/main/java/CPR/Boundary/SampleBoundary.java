@@ -1,6 +1,7 @@
 package CPR.Boundary;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class SampleBoundary {
 	private String sample_Id;
@@ -38,6 +39,25 @@ public class SampleBoundary {
 	public String toString() {
 		return "SampleBoundary [sample_Id=" + sample_Id + ", session_Id=" + session_Id + ", measurements="
 				+ Arrays.toString(measurements) + "]";
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(sample_Id, session_Id, measurements);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SampleBoundary other = (SampleBoundary) obj;
+		return Objects.equals(sample_Id, other.sample_Id)
+				&& Objects.equals(session_Id, other.session_Id)
+				&& Objects.equals(measurements, other.measurements);
 	}
 	
 	

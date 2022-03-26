@@ -1,5 +1,7 @@
 package CPR.Boundary;
 
+import java.util.Objects;
+
 public class UserBoundary {
 	
 	private String username;
@@ -22,5 +24,22 @@ public class UserBoundary {
 		return "UserBoundary [username=" + username + ", password=" + password + "]";
 	}
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(username, password);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserBoundary other = (UserBoundary) obj;
+		return Objects.equals(username, other.username)
+				&& Objects.equals(password, other.password);
+	}
 	
 }

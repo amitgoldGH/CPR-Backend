@@ -2,6 +2,7 @@ package CPR.Boundary;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
 
 public class SessionBoundary {
 
@@ -48,6 +49,26 @@ public class SessionBoundary {
 	public String toString() {
 		return "SessionBoundary [session_Id=" + session_Id + ", username=" + username + ", measurement_Summary="
 				+ Arrays.toString(measurement_Summary) + ", creation_Date=" + creation_Date + "]";
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(session_Id, username, measurement_Summary, creation_Date);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SessionBoundary other = (SessionBoundary) obj;
+		return Objects.equals(session_Id, other.session_Id)
+				&& Objects.equals(username, other.username)
+				&& Objects.equals(measurement_Summary, other.measurement_Summary)
+				&& Objects.equals(creation_Date, other.creation_Date);
 	}
 	
 	
