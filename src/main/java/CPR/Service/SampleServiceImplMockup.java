@@ -17,16 +17,18 @@ import org.springframework.stereotype.Service;
 import CPR.Boundary.SampleBoundary;
 import CPR.Data.SampleConverter;
 import CPR.Data.SampleEntity;
+import CPR.Exception.SampleBadRequestException;
+import CPR.Exception.SampleNotFoundException;
 
 @Service
-public class SampleServiceImpl implements SampleService {
+public class SampleServiceImplMockup implements SampleService {
 
 	private Map<String, SampleEntity> storage;
 	private SampleConverter converter;
 	private AtomicLong counter;
 	
 	@Autowired
-	public SampleServiceImpl(SampleConverter converter)
+	public SampleServiceImplMockup(SampleConverter converter)
 	{
 		this.converter = converter;
 	}
@@ -90,11 +92,13 @@ public class SampleServiceImpl implements SampleService {
 			}
 			else 
 			{
+				throw new SampleNotFoundException("Existing sample with same id doesn't exist.");
 				// TODO: Exception existing sample with same id doesnt exist.
 			}
 		}
 		else
 		{
+			throw new SampleBadRequestException("Bad sample, sample id or session id are null");
 			// TODO: Exception, invalid sample
 		}
 	}
