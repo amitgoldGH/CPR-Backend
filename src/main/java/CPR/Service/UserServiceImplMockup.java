@@ -15,6 +15,9 @@ import CPR.Boundary.NewUserBoundary;
 import CPR.Boundary.UserBoundary;
 import CPR.Data.UserConverter;
 import CPR.Data.UserEntity;
+import CPR.Data.UserRole;
+import CPR.Exception.UserBadRequestException;
+import CPR.Exception.UserNotFoundException;
 
 @Service
 public class UserServiceImplMockup implements UserService{
@@ -46,7 +49,7 @@ public class UserServiceImplMockup implements UserService{
 			}
 			else
 			{
-				UserEntity entity = new UserEntity(new_User_Boundary.getUsername(), new_User_Boundary.getPassword());
+				UserEntity entity = new UserEntity(new_User_Boundary.getUsername(), new_User_Boundary.getPassword(), UserRole.valueOf(new_User_Boundary.getRole()));
 				storage.put(entity.getUsername(), entity);
 				System.out.println("Created and stored user successfully");
 				return converter.convertToBoundary(entity);
@@ -64,18 +67,20 @@ public class UserServiceImplMockup implements UserService{
 			UserEntity entity = storage.get(user_Boundary.getUsername());
 			if (entity != null && entity.getPassword().equals(user_Boundary.getPassword()))
 			{
-				System.out.println("Login successful!");
+				System.out.println(user_Boundary.getUsername() + " Login successful!");
 				return user_Boundary;
 			}
 			else
 			{
+				throw new UserNotFoundException("User doesn't exist or password incorrect");
 				// TODO EXCEPTION User doesnt exist or invalid passsword
 			}
 		}
 		
 		// TODO EXCEPTION Invalid input username/password
-		return null;
-	}
+		throw new UserBadRequestException("Input username/password were null");
+		
+		}
 
 	@Override
 	public Object getUser(String username) {
@@ -97,14 +102,20 @@ public class UserServiceImplMockup implements UserService{
 	@Override
 	public void updateUser(UserBoundary user_Boundary) {
 		UserEntity entity = converter.convertToEntity(user_Boundary);
-		if (entity.getUsername() != null && entity.getPassword() != null)
+		if (entity.getUsername() != null && entity.getPassword() != null && entity.getRole() != null)
 		{
 			if (storage.get(entity.getUsername()) != null)
 				storage.put(entity.getUsername(), entity);
 			else
 			{
+				throw new UserNotFoundException("No existing user with that username.");
 				// TODO EXCEPTION USER DOESNT EXIST
 			}
+		}
+		else
+		{
+			throw new UserBadRequestException("UserBoundary object missing fields.");
+			// TODO updated user missing fields.
 		}
 		
 	}
