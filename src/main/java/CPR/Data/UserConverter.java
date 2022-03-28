@@ -13,6 +13,7 @@ public class UserConverter {
 		UserBoundary userBoundary=new UserBoundary();
 
 		userBoundary.setUsername(entity.getUsername());
+		userBoundary.setRole(entity.getRole().name());
 		userBoundary.setPassword(entity.getPassword());
 		
 		return userBoundary;
@@ -23,6 +24,7 @@ public class UserConverter {
 		UserEntity userEntity=new UserEntity();
 		
 		userEntity.setUsername(boundary.getUsername());
+		userEntity.setRole(UserRole.valueOf(boundary.getRole()));
 		userEntity.setPassword(boundary.getPassword());
 		
 		return userEntity;

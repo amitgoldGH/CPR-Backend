@@ -3,13 +3,15 @@ package CPR.Boundary;
 public class NewUserBoundary {
 	
 	private String username;
+	private String role;
 	private String password;
 	
 	
 	public NewUserBoundary() {}
 	
-	public NewUserBoundary(String username, String password) {
+	public NewUserBoundary(String username, String password, String role) {
 		this.setUsername(username);
+		this.setRole(role);
 		this.setPassword(password);
 	}
 	
@@ -19,6 +21,12 @@ public class NewUserBoundary {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -27,7 +35,7 @@ public class NewUserBoundary {
 	}
 	@Override
 	public String toString() {
-		return "NewUserBoundary [username=" + username + ", password=" + password + "]";
+		return "NewUserBoundary [username=" + username + ", role=" + role + ", password=" + password + "]";
 	}
 	
 	
