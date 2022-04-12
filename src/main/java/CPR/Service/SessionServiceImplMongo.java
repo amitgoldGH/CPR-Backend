@@ -11,10 +11,12 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import CPR.Boundary.SampleBoundary;
 import CPR.Boundary.SessionBoundary;
 import CPR.DAL.IdGeneratorDao;
 import CPR.DAL.SessionDao;
 import CPR.Data.IdGeneratorEntity;
+import CPR.Data.SampleEntity;
 import CPR.Data.SessionConverter;
 import CPR.Data.SessionEntity;
 import CPR.Exception.SessionBadRequestException;
@@ -24,13 +26,16 @@ import CPR.Exception.SessionNotFoundException;
 public class SessionServiceImplMongo implements SessionService {
 	private SessionConverter converter;
 	private SessionDao sessionDao;
+	private SampleService service;
 	private IdGeneratorDao idGeneratorDao;
 		
 	@Autowired
-	public SessionServiceImplMongo(SessionDao sessionDao, SessionConverter converter, IdGeneratorDao idGeneratorDao) {
+	public SessionServiceImplMongo(SessionDao sessionDao, SessionConverter converter, IdGeneratorDao idGeneratorDao, SampleService service) {
 		this.sessionDao = sessionDao;
 		this.converter = converter;
 		this.idGeneratorDao = idGeneratorDao;
+		
+		this.service = service;
 	}
 	
 	@PostConstruct
@@ -131,7 +136,15 @@ public class SessionServiceImplMongo implements SessionService {
 	@Override
 	public void deleteSessionById(String session_Id) {
 		if (sessionDao.findBySessionId(session_Id) != null)
+		{
 			sessionDao.deleteById(session_Id);
+			
+			List<Object> relatedSamples = service.retrieveAllSessionSamples(session_Id); 
+			
+			for (Object sample : relatedSamples) {
+				service.deleteSample(((SampleBoundary)sample).getSampleId());
+			}
+		}
 		else
 			System.out.println("Session doesnt exist");
 		// TODO Exception for session not found
@@ -140,13 +153,12 @@ public class SessionServiceImplMongo implements SessionService {
 
 	@Override
 	public void deleteSessionByUsername(String username) {
-		int delCounter = 0;
 		
 		for (SessionEntity entity : sessionDao.findAllByUsername(username).stream().parallel().collect(Collectors.toList())) {
-			sessionDao.deleteById(entity.getSessionId());
-			delCounter++;
+			deleteSessionById(entity.getSessionId());
+			//	sessionDao.deleteById(entity.getSessionId());
 		}
-		System.out.println("Delete session by username: " + username + ", Deleted " + delCounter + " sessions.");
+		System.out.println("Deleted sessions by username: " + username);
 		
 	}
 
