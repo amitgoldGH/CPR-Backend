@@ -4,29 +4,29 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class SampleBoundary {
-	private String sample_Id;
-	private String session_Id;
+	private String sampleId;
+	private String sessionId;
 	private String[] measurements;
 	
 	public SampleBoundary() {}
 	
 	public SampleBoundary(String sample_Id, String session_Id, String[] measurements) {
-		this.setSample_Id(sample_Id);
-		this.setSession_Id(session_Id);
+		this.setSampleId(sample_Id);
+		this.setSessionId(session_Id);
 		this.setMeasurements(measurements);
 	}
 	
-	public String getSample_Id() {
-		return sample_Id;
+	public String getSampleId() {
+		return sampleId;
 	}
-	public void setSample_Id(String sample_Id) {
-		this.sample_Id = sample_Id;
+	public void setSampleId(String sample_Id) {
+		this.sampleId = sample_Id;
 	}
-	public String getSession_Id() {
-		return session_Id;
+	public String getSessionId() {
+		return sessionId;
 	}
-	public void setSession_Id(String session_Id) {
-		this.session_Id = session_Id;
+	public void setSessionId(String session_Id) {
+		this.sessionId = session_Id;
 	}
 	public String[] getMeasurements() {
 		return measurements;
@@ -34,16 +34,16 @@ public class SampleBoundary {
 	public void setMeasurements(String[] measurements) {
 		this.measurements = measurements;
 	}
-
-	@Override
-	public String toString() {
-		return "SampleBoundary [sample_Id=" + sample_Id + ", session_Id=" + session_Id + ", measurements="
-				+ Arrays.toString(measurements) + "]";
-	}
 	
 	@Override
+	public String toString() {
+		return "SampleBoundary [sampleId=" + sampleId + ", sessionId=" + sessionId + ", measurements="
+				+ Arrays.toString(measurements) + "]";
+	}
+
+	@Override
 	public int hashCode() {
-		return Objects.hash(sample_Id, session_Id, measurements);
+		return Objects.hash(sampleId, sessionId, measurements);
 	}
 	
 	@Override
@@ -55,8 +55,8 @@ public class SampleBoundary {
 		if (getClass() != obj.getClass())
 			return false;
 		SampleBoundary other = (SampleBoundary) obj;
-		return Objects.equals(sample_Id, other.sample_Id)
-				&& Objects.equals(session_Id, other.session_Id)
+		return Objects.equals(sampleId, other.sampleId)
+				&& Objects.equals(sessionId, other.sessionId)
 				&& Objects.equals(measurements, other.measurements);
 	}
 	

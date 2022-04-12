@@ -1,5 +1,16 @@
 package CPR.Data;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
+@Document(collection = "USERS")
+/* USERS table:
+ * ID (USERNAME)		| ROLE			| PASSWORD 		|
+ * VARCHAR(255) <PK>	| ENUMERATED	| VARCHAR(255)	|
+ * */
 public class UserEntity {
 	
 	
@@ -17,6 +28,7 @@ public class UserEntity {
 		this.role = role;
 	}
 	
+	@MongoId
 	public String getUsername() {
 		return username;
 	}
@@ -24,7 +36,7 @@ public class UserEntity {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+	@Enumerated(EnumType.STRING)
 	public UserRole getRole() {
 		return role;
 	}

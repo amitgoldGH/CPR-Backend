@@ -11,8 +11,8 @@ public class SampleConverter {
 	{
 		SampleBoundary sampleBoundary=new SampleBoundary();
 
-		sampleBoundary.setSample_Id(entity.getSample_Id());
-		sampleBoundary.setSession_Id(entity.getSession_Id());
+		sampleBoundary.setSampleId(entity.getSampleId());
+		sampleBoundary.setSessionId(entity.getSessionId());
 		sampleBoundary.setMeasurements(entity.getMeasurements());
 		
 		return sampleBoundary;
@@ -22,8 +22,8 @@ public class SampleConverter {
 	{
 		SampleEntity sampleEntity=new SampleEntity();
 		
-		sampleEntity.setSample_Id(boundary.getSample_Id());
-		sampleEntity.setSession_Id(boundary.getSession_Id());
+		sampleEntity.setSampleId(boundary.getSampleId());
+		sampleEntity.setSessionId(boundary.getSessionId());
 		sampleEntity.setMeasurements(boundary.getMeasurements());
 		
 		return sampleEntity;

@@ -11,10 +11,10 @@ public class SessionConverter {
 	{
 		SessionBoundary sessionBoundary=new SessionBoundary();
 
-		sessionBoundary.setSession_Id(entity.getSession_Id());
+		sessionBoundary.setSessionId(entity.getSessionId());
 		sessionBoundary.setUsername(entity.getUsername());
-		sessionBoundary.setMeasurement_Summary(entity.getMeasurement_Summary());
-		sessionBoundary.setCreation_Date(entity.getCreation_Date());
+		sessionBoundary.setMeasurementSummary(entity.getMeasurementSummary());
+		sessionBoundary.setCreationDate(entity.getCreationDate());
 		
 		return sessionBoundary;
 
@@ -23,10 +23,10 @@ public class SessionConverter {
 	{
 		SessionEntity sessionEntity=new SessionEntity();
 
-		sessionEntity.setSession_Id(boundary.getSession_Id());
+		sessionEntity.setSessionId(boundary.getSessionId());
 		sessionEntity.setUsername(boundary.getUsername());
-		sessionEntity.setMeasurement_Summary(boundary.getMeasurement_Summary());
-		sessionEntity.setCreation_Date(boundary.getCreation_Date());
+		sessionEntity.setMeasurementSummary(boundary.getMeasurementSummary());
+		sessionEntity.setCreationDate(boundary.getCreationDate());
 		
 		return sessionEntity;
 
