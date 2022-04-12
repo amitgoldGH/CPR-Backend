@@ -45,9 +45,9 @@ public class SessionServiceImplMockup implements SessionService{
 	public Object createSession(SessionBoundary session) {
 		if (session.getUsername() != null) {
 			SessionEntity entity = converter.convertToEntity(session);
-			entity.setCreation_Date(new Date());
-			entity.setSession_Id(String.valueOf(counter.getAndIncrement()));
-			storage.put(entity.getSession_Id(), entity);
+			entity.setCreationDate(new Date());
+			entity.setSessionId(String.valueOf(counter.getAndIncrement()));
+			storage.put(entity.getSessionId(), entity);
 			System.out.println("Created and stored session in memory successfully.");
 			
 			return converter.convertToBoundary(entity);
@@ -87,12 +87,12 @@ public class SessionServiceImplMockup implements SessionService{
 
 	@Override
 	public void updateSession(SessionBoundary session) {
-		if (session.getSession_Id() != null && session.getUsername() != null)
+		if (session.getSessionId() != null && session.getUsername() != null)
 		{
-			if (storage.get(session.getSession_Id()) != null)
+			if (storage.get(session.getSessionId()) != null)
 			{
-				storage.put(session.getSession_Id(), converter.convertToEntity(session));
-				System.out.println("Update sample success, sample_id: " + session.getSession_Id() + " updated.");
+				storage.put(session.getSessionId(), converter.convertToEntity(session));
+				System.out.println("Update sample success, sample_id: " + session.getSessionId() + " updated.");
 				
 			}
 			else 
@@ -132,7 +132,7 @@ public class SessionServiceImplMockup implements SessionService{
 		for (SessionEntity entity : storage.values().stream().parallel().collect(Collectors.toList())) {
 			if (entity.getUsername().equalsIgnoreCase(username))
 			{
-				storage.remove(entity.getSession_Id());
+				storage.remove(entity.getSessionId());
 				delCounter++;
 			}
 		}
