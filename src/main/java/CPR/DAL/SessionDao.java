@@ -11,5 +11,7 @@ public interface SessionDao extends MongoRepository<SessionEntity, String>{
 	
 	public List<SessionEntity> findAllByUsername(@Param("username") String username);
 
+	public SessionEntity findBySessionId(@Param("sessionId") String sessionId);
+	
 
 }
