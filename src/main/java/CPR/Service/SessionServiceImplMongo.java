@@ -3,7 +3,6 @@ package CPR.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
@@ -21,7 +20,6 @@ import CPR.Exception.SessionNotFoundException;
 
 @Service
 public class SessionServiceImplMongo implements SessionService {
-	private Map<String, SessionEntity> storage;
 	private SessionConverter converter;
 	private SessionDao sessionDao;
 	private AtomicLong counter;

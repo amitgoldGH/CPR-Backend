@@ -20,7 +20,6 @@ import CPR.Exception.SampleNotFoundException;
 @Service
 public class SampleServiceImplMongo implements SampleService{
 	
-//	private Map<String, SampleEntity> storage;
 	private SampleDao sampleDao;
 	private SampleConverter converter;
 	private AtomicLong counter;
@@ -49,12 +48,10 @@ public class SampleServiceImplMongo implements SampleService{
 		{
 			System.out.println("createSample Success, storing in memory!");
 			return this.sampleDao.save(sampleEntity);
-			//return converter.convertToBoundary(sampleEntity);
 		}
 		else {
 			System.out.println("\nERROR!!!!!!! createSample in SampleServiceImpl\n" + sampleEntity.toString());
 			// TODO: Exception failed to create sample_id or invalid session_id in given sample.
-			//return converter.convertToBoundary(new SampleEntity("NULL", "NULL", new String[] {"NULL"}));
 			throw new SampleBadRequestException("Bad sample input given.");
 		}
 	}
@@ -68,14 +65,6 @@ public class SampleServiceImplMongo implements SampleService{
 		return list.stream()
 				.map(this.converter::convertToBoundary)
 				.collect(Collectors.toList());
-		
-//		for (SampleEntity entity : storage.values().stream().parallel().collect(Collectors.toList())) {
-//			if (entity.getSession_Id().equalsIgnoreCase(session_Id))
-//				filteredList.add(converter.convertToBoundary(entity));
-//		}
-//		
-//		return filteredList;
-		
 		
 	}
 	
