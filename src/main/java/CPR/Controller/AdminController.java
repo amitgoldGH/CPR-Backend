@@ -37,10 +37,10 @@ public class AdminController {
 			path="/api/users",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Object> getAllUsers() {
+	public Object[] getAllUsers() {
 		System.out.println("ADMIN_CONTROLLER /api/users GET ALL USERS TYPE_GET called");
 		
-		return userService.getAllUsers();
+		return userService.getAllUsers().toArray(new UserBoundary[0]);
 	}
 	
 	//DELETE request, path="/api/users"
@@ -76,10 +76,10 @@ public class AdminController {
 			path = "/api/sessions",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Object> getAllSessions() {
+	public Object[] getAllSessions() {
 		System.out.println("ADMIN_CONTROLLER /api/sessions GET ALL SESSIONS TYPE_GET called");
 		
-		return this.sessionService.getAllSessions();	
+		return this.sessionService.getAllSessions().toArray(new SessionBoundary[0]);	
 	}
 	
 	//GET request, path="/api/sessions/user/{username}"
@@ -89,10 +89,10 @@ public class AdminController {
 			path = "/api/sessions/user/{username}",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Object> getAllSessionsByUser(@PathVariable("username") String username) {
+	public Object[] getAllSessionsByUser(@PathVariable("username") String username) {
 		System.out.println("ADMIN_CONTROLLER /api/sessions/user/" +username + " GET ALL SESSIONS BY USER TYPE_GET called");
 		
-		return this.sessionService.getAllSessionsByUser(username);
+		return this.sessionService.getAllSessionsByUser(username).toArray(new SessionBoundary[0]);
 		
 	}
 	
@@ -140,10 +140,10 @@ public class AdminController {
 			path = "/api/samples",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Object> getAllSamples() {
+	public Object[] getAllSamples() {
 		System.out.println("ADMIN_CONTROLLER /api/samples GET ALL SAMPLES TYPE_GET called");
 		
-		return this.sampleService.getAllSamples();
+		return this.sampleService.getAllSamples().toArray(new SampleBoundary[0]);
 	}
 	
 	//DELETE request, path="/api/samples"

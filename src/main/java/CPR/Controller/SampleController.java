@@ -38,15 +38,15 @@ public class SampleController {
 	
 	//GET request, path="/api/samples/session/{id}"
 	//Accept: None
-	//Return: SampleBoundary list
+	//Return: SampleBoundary array
 	@RequestMapping(
 			path="/api/samples/session/{sessionId}",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-		public List<Object> retrieveAllSessionSamples(
+		public Object[] retrieveAllSessionSamples(
 				@PathVariable("sessionId") String session_Id){
 			System.out.println("SAMPLE_CONTROLLER /api/samples/session/" + session_Id + " RETRIEVE ALL SAMPLES OF GIVEN SESSION ID TYPE_GET called");
-			return this.sampleService.retrieveAllSessionSamples(session_Id);
+			return this.sampleService.retrieveAllSessionSamples(session_Id).toArray(new SampleBoundary[0]);
 		}
 	
 	//PUT request, path="/api/samples"
