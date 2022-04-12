@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import CPR.Boundary.SessionBoundary;
 import CPR.Data.SessionConverter;
 import CPR.Data.SessionEntity;
+import CPR.Exception.SessionBadRequestException;
+import CPR.Exception.SessionNotFoundException;
 
 @Service
 public class SessionServiceImplMockup implements SessionService{
@@ -52,8 +54,9 @@ public class SessionServiceImplMockup implements SessionService{
 		}
 		else {
 			// TODO: Invalid username
+			throw new SessionBadRequestException("Invalid Username");
 		}
-		return null;
+		//return null;
 	}
 
 	@Override
@@ -79,7 +82,7 @@ public class SessionServiceImplMockup implements SessionService{
 		if (session_Id != null & storage.get(session_Id) != null)
 			return converter.convertToBoundary(storage.get(session_Id));
 		else // TODO EXCEPTION SESSION NOT FOUND
-			return null;
+			throw new SessionNotFoundException("No session with given id found");
 	}
 
 	@Override
@@ -95,11 +98,13 @@ public class SessionServiceImplMockup implements SessionService{
 			else 
 			{
 				// TODO: Exception existing session with same id doesnt exist.
+				throw new SessionNotFoundException("Existing session with given id doesn't exist");
 			}
 		}
 		else
 		{
 			// TODO: Exception, invalid session
+			throw new SessionBadRequestException("Invalid session input given.");
 		}
 		
 	}
