@@ -19,7 +19,7 @@ public interface SampleService {
 	public List<Object> getAllSamples();
 	
 	//UPDATE
-	public void updateSample(SampleBoundary sample);
+	public void updateSample(SampleBoundary update_sample);
 	
 	//DELETE
 	public void deleteAllSamples();
