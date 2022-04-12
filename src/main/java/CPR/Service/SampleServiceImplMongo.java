@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import CPR.Boundary.SampleBoundary;
+import CPR.DAL.IdGeneratorDao;
 import CPR.DAL.SampleDao;
+import CPR.Data.IdGeneratorEntity;
 import CPR.Data.SampleConverter;
 import CPR.Data.SampleEntity;
 import CPR.Exception.SampleBadRequestException;
@@ -22,27 +24,33 @@ public class SampleServiceImplMongo implements SampleService{
 	
 	private SampleDao sampleDao;
 	private SampleConverter converter;
-	private AtomicLong counter;
-	
+	private IdGeneratorDao idGeneratorDao;
+		
 	@Autowired
-	public SampleServiceImplMongo(SampleDao sampleDao, SampleConverter converter)
+	public SampleServiceImplMongo(SampleDao sampleDao, SampleConverter converter, IdGeneratorDao idGeneratorDao)
 	{
 		this.sampleDao = sampleDao;
 		this.converter = converter;
+		this.idGeneratorDao = idGeneratorDao;
 	}
 	
 	@PostConstruct
-	public void init()
-	{	
-		// initialize counter
-		this.counter = new AtomicLong(1L);		
-	}
+	public void init() {}
 	
 	@Transactional
 	@Override
 	public Object createSample(SampleBoundary sample) {
 		SampleEntity sampleEntity = converter.convertToEntity(sample);
-		sampleEntity.setSampleId(String.valueOf(counter.getAndIncrement()));
+		if (sampleEntity.getSessionId() == null || sampleEntity.getMeasurements() == null)
+			throw new SampleBadRequestException("sample measurementsare or session id null");
+		
+		//Generate random new ID
+		IdGeneratorEntity idContainer = new IdGeneratorEntity();
+		idContainer = this.idGeneratorDao.insert(idContainer);
+		String newId = this.idGeneratorDao.findAll().get(0).getId();
+		this.idGeneratorDao.deleteAll();
+		
+		sampleEntity.setSampleId(newId);
 		
 		if (sampleEntity.getSampleId() != null && sampleEntity.getSessionId() != null)
 		{

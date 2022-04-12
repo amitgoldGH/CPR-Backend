@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import CPR.Boundary.SessionBoundary;
+import CPR.DAL.IdGeneratorDao;
 import CPR.DAL.SessionDao;
+import CPR.Data.IdGeneratorEntity;
 import CPR.Data.SessionConverter;
 import CPR.Data.SessionEntity;
 import CPR.Exception.SessionBadRequestException;
@@ -22,26 +24,30 @@ import CPR.Exception.SessionNotFoundException;
 public class SessionServiceImplMongo implements SessionService {
 	private SessionConverter converter;
 	private SessionDao sessionDao;
-	private AtomicLong counter;
-	
+	private IdGeneratorDao idGeneratorDao;
+		
 	@Autowired
-	public SessionServiceImplMongo(SessionDao sessionDao, SessionConverter converter) {
+	public SessionServiceImplMongo(SessionDao sessionDao, SessionConverter converter, IdGeneratorDao idGeneratorDao) {
 		this.sessionDao = sessionDao;
 		this.converter = converter;
+		this.idGeneratorDao = idGeneratorDao;
 	}
 	
 	@PostConstruct
-	public void init()
-	{	
-		// initialize counter
-		this.counter = new AtomicLong(1L);		
-	}
+	public void init() {}
 	@Override
 	public Object createSession(SessionBoundary session) {
 		if (session.getUsername() != null) {
 			SessionEntity entity = converter.convertToEntity(session);
 			entity.setCreationDate(new Date());
-			entity.setSessionId(String.valueOf(counter.getAndIncrement()));
+			
+			//Generate random new ID
+			IdGeneratorEntity idContainer = new IdGeneratorEntity();
+			idContainer = this.idGeneratorDao.insert(idContainer);
+			String newId = this.idGeneratorDao.findAll().get(0).getId();
+			this.idGeneratorDao.deleteAll();
+			
+			entity.setSessionId(newId);
 			entity = sessionDao.save(entity);
 			System.out.println("Created and stored session in memory successfully.");
 			
