@@ -67,7 +67,7 @@ public class SessionBoundary {
 		SessionBoundary other = (SessionBoundary) obj;
 		return Objects.equals(session_Id, other.session_Id)
 				&& Objects.equals(username, other.username)
-				&& Objects.equals(measurement_Summary, other.measurement_Summary)
+				&& Arrays.equals(measurement_Summary, other.measurement_Summary)
 				&& Objects.equals(creation_Date, other.creation_Date);
 	}
 	
