@@ -19,7 +19,7 @@ import CPR.Data.UserRole;
 import CPR.Exception.UserBadRequestException;
 import CPR.Exception.UserNotFoundException;
 
-@Service
+//@Service
 public class UserServiceImplMockup implements UserService{
 
 	private Map<String, UserEntity> storage;
