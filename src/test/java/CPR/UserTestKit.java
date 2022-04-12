@@ -9,7 +9,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -145,14 +144,10 @@ public class UserTestKit {
 	void testFailedToLogin() {
 		boolean thrown = false;
 
-		NewUserBoundary newUserBoundary=new NewUserBoundary(test_Username, test_Password, UserRole.USER.name());
-		
-		UserBoundary userBoundary = this.client.postForObject(this.url, newUserBoundary, UserBoundary.class);
-		
+		UserBoundary test_user =new UserBoundary(test_Username, test_Password, UserRole.USER.name());
+				
 		try {
-		userBoundary.setPassword("fakePassword");
-		UserBoundary userBoundary2 = this.client
-		.postForObject(this.url + "/login" , userBoundary, UserBoundary.class);
+		this.client.postForObject(this.url + "/login" , test_user, UserBoundary.class);
 		
 		}catch (HttpClientErrorException | HttpServerErrorException httpClientOrServerExc) {
 			
