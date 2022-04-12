@@ -156,7 +156,6 @@ public class SessionServiceImplMongo implements SessionService {
 		
 		for (SessionEntity entity : sessionDao.findAllByUsername(username).stream().parallel().collect(Collectors.toList())) {
 			deleteSessionById(entity.getSessionId());
-			//	sessionDao.deleteById(entity.getSessionId());
 		}
 		System.out.println("Deleted sessions by username: " + username);
 		
