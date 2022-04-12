@@ -82,15 +82,20 @@ public class UserTestKit {
 			
 		NewUserBoundary newUserBoundary=new NewUserBoundary(test_Username, test_Password, UserRole.USER.name());
 			
-			UserBoundary userBoundary = this.client.postForObject(this.url, newUserBoundary, UserBoundary.class);
+		UserBoundary userBoundary = this.client.postForObject(this.url, newUserBoundary, UserBoundary.class);
 			
-			
-			assertThat(this.client
-					.postForObject(this.url + "/login" , userBoundary, UserBoundary.class))
-					.isNotNull()
-					.isEqualTo(userBoundary);
+		assertThat(this.client
+				.postForObject(this.url + "/login" , userBoundary, UserBoundary.class))
+				.isNotNull()
+				.isEqualTo(userBoundary);
 		}
-	
+	//GIVEN
+		//the server is up
+	//WHEN
+		//I Invoke the POST request through the URL: /api/users
+		//Inserting new userboundary with null username
+	//THEN
+		//the response status is 400(BAD_REQUEST) and we get exception
 	@Test
 	void testFailedCreateUser() {
 		RestTemplate restTemplate = new RestTemplate();
@@ -110,7 +115,32 @@ public class UserTestKit {
 	    
 
 		}
-
+	
+	//GIVEN
+		//The server is up
+	//WHEN
+		//I Invoke the POST request through the URL: /api/users/login
+		//Inserting a User boundary of existing user
+	//THEN
+		//the response status is 200(OK) and we get user boundary
+	@Test
+	void testLogin() {
+		
+		UserBoundary test_Admin_User = new UserBoundary("admin", UserRole.ADMIN.name(), test_Password);
+		
+		assertThat(this.client
+				.postForObject(this.url + "/login" ,test_Admin_User, UserBoundary.class))
+				.isNotNull()
+				.isEqualTo(test_Admin_User);
+	}
+	
+	//GIVEN
+		//the server is up
+	//WHEN
+		//I Invoke the POST request through the URL: /api/users
+		//Inserting user boundary with password that is different from one in db
+	//THEN
+		//the response status is 404(NOT_FOUND) and we get exception
 	@Test
 	void testFailedToLogin() {
 		boolean thrown = false;
@@ -137,7 +167,15 @@ public class UserTestKit {
 	}
 
 	
+	
 	// Try to update an existing user's password.
+	//GIVEN
+		//the server is up
+	//WHEN
+		//I Invoke the PUT request through the URL: /api/users
+		//Inserting user boundary with updated password
+	//THEN
+		//the response status is 200(OK)
 	@Test
 	void testUpdateUser() {
 		
@@ -161,6 +199,13 @@ public class UserTestKit {
 	
 	// Trying to update a user's username to a username not existing,  if a user with the username "updated_User" already exists this will update that one's password.
 	// NOTE Might want to update in the future to add a token requirement that fits the user trying to be updated.
+	//GIVEN
+		//the server is up
+	//WHEN
+		//I Invoke the PUT request through the URL: /api/users
+		//Inserting user boundary with username that doesn't exist in db
+	//THEN
+		//the response status is 404(NOT_FOUND) and we get exception
 	@Test
 	void testFailedUpdateUser() {
 		boolean thrown = false;
