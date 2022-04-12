@@ -39,7 +39,7 @@ public class SessionController {
 	
 	//GET request, path="/api/sessions/{id}"
 	//Accept: Nothing
-	//Return array of all sessions in database
+	//Return SessionBoundary with given the given ID
 	@RequestMapping(
 			path = "/api/sessions/{id}",
 			method = RequestMethod.GET,
