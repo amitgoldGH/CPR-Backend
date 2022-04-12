@@ -55,9 +55,10 @@ public class SampleServiceImplMockup implements SampleService {
 			return converter.convertToBoundary(sampleEntity);
 		}
 		else {
-			System.out.println("\nERROR!!!!!!! createSample in SampleServiceImpl\n");
+			System.out.println("\nERROR!!!!!!! createSample in SampleServiceImpl\n" + sampleEntity.toString());
 			// TODO: Exception failed to create sample_id or invalid session_id in given sample.
-			return converter.convertToBoundary(new SampleEntity("NULL", "NULL", new String[] {"NULL"}));
+			//return converter.convertToBoundary(new SampleEntity("NULL", "NULL", new String[] {"NULL"}));
+			throw new SampleBadRequestException("Bad sample input given.");
 		}
 	}
 
