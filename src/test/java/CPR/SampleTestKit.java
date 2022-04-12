@@ -26,7 +26,6 @@ public class SampleTestKit {
 	private RestTemplate client;
 	// setup a String used to represent the URL used to access the server
 	private String url;
-	private String test_Username;
 	private String test_Session_Id;
 
 	// get random port used by server
@@ -40,7 +39,6 @@ public class SampleTestKit {
 	public void initTestCase() {
 		this.url = "http://localhost:" + this.port +"/api/samples" ;
 		this.client = new RestTemplate();
-		this.test_Username = "testUser";
 		this.test_Session_Id = "1";
 	}
 	
@@ -60,8 +58,8 @@ public class SampleTestKit {
 		SampleBoundary test_sample = new SampleBoundary(null, test_Session_Id, measures);
 		test_sample = this.client.postForObject(this.url, test_sample, SampleBoundary.class);
 		
-		assertThat(test_sample.getSample_Id() != null 
-				&& test_sample.getSession_Id().equals(test_Session_Id) 
+		assertThat(test_sample.getSampleId() != null 
+				&& test_sample.getSessionId().equals(test_Session_Id) 
 				&& test_sample.getMeasurements().equals(measures));
 		
 	}

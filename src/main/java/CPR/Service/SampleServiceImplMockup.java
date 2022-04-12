@@ -3,7 +3,6 @@ package CPR.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -12,7 +11,6 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import CPR.Boundary.SampleBoundary;
 import CPR.Data.SampleConverter;
@@ -20,7 +18,7 @@ import CPR.Data.SampleEntity;
 import CPR.Exception.SampleBadRequestException;
 import CPR.Exception.SampleNotFoundException;
 
-@Service
+//@Service
 public class SampleServiceImplMockup implements SampleService {
 
 	private Map<String, SampleEntity> storage;
@@ -46,12 +44,12 @@ public class SampleServiceImplMockup implements SampleService {
 	@Override
 	public Object createSample(SampleBoundary sample) {
 		SampleEntity sampleEntity = converter.convertToEntity(sample);
-		sampleEntity.setSample_Id(String.valueOf(counter.getAndIncrement()));
+		sampleEntity.setSampleId(String.valueOf(counter.getAndIncrement()));
 		
-		if (sampleEntity.getSample_Id() != null && sampleEntity.getSession_Id() != null)
+		if (sampleEntity.getSampleId() != null && sampleEntity.getSessionId() != null)
 		{
 			System.out.println("createSample Success, storing in memory!");
-			storage.put(sampleEntity.getSample_Id(), sampleEntity);
+			storage.put(sampleEntity.getSampleId(), sampleEntity);
 			return converter.convertToBoundary(sampleEntity);
 		}
 		else {
@@ -67,7 +65,7 @@ public class SampleServiceImplMockup implements SampleService {
 		List<Object> filteredList = new ArrayList<Object>();
 		
 		for (SampleEntity entity : storage.values().stream().parallel().collect(Collectors.toList())) {
-			if (entity.getSession_Id().equalsIgnoreCase(session_Id))
+			if (entity.getSessionId().equalsIgnoreCase(session_Id))
 				filteredList.add(converter.convertToBoundary(entity));
 		}
 		
@@ -83,12 +81,12 @@ public class SampleServiceImplMockup implements SampleService {
 
 	@Override
 	public void updateSample(SampleBoundary sample) {
-		if (sample.getSample_Id() != null && sample.getSession_Id() != null)
+		if (sample.getSampleId() != null && sample.getSessionId() != null)
 		{
-			if (storage.get(sample.getSample_Id()) != null)
+			if (storage.get(sample.getSampleId()) != null)
 			{
-				storage.put(sample.getSample_Id(), converter.convertToEntity(sample));
-				System.out.println("Update sample success, sample_id: " + sample.getSample_Id() + " updated.");
+				storage.put(sample.getSampleId(), converter.convertToEntity(sample));
+				System.out.println("Update sample success, sample_id: " + sample.getSampleId() + " updated.");
 				
 			}
 			else 

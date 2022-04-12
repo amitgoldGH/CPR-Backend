@@ -57,9 +57,9 @@ public class AdminTestKit {
 	public void setUp() {
 		//create Admin user
 		this.client.postForObject(this.url_user, new CPR.Boundary.NewUserBoundary(
-				"admin",
-				"adminPassword",
-				CPR.Data.UserRole.ADMIN.name()),
+				test_Username,
+				test_Password,
+				CPR.Data.UserRole.USER.name()),
 				CPR.Boundary.NewUserBoundary.class);
 	}
 	

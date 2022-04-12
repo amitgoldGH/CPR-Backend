@@ -72,7 +72,7 @@ public class SessionTestKit {
 						, SessionBoundary.class); 
 		
 		assertThat(this.client
-				.getForObject(this.url + "/{id}", SessionBoundary.class, test_Session.getSession_Id()))
+				.getForObject(this.url + "/{id}", SessionBoundary.class, test_Session.getSessionId()))
 				.isNotNull()
 				.isEqualTo(test_Session);
 	}
@@ -118,12 +118,12 @@ public class SessionTestKit {
 		SessionBoundary test_Session = new SessionBoundary(null, test_Username, new String[0], new Date());
 		test_Session = this.client.postForObject(this.url, test_Session, SessionBoundary.class); // Put in the new id
 		
-		test_Session.setMeasurement_Summary(new String[]{"Updated Measure Summary"});
+		test_Session.setMeasurementSummary(new String[]{"Updated Measure Summary"});
 		
 		this.client.put(this.url, test_Session);
 		
 		assertThat(this.client
-				.getForObject(this.url + "/{id}", SessionBoundary.class, test_Session.getSession_Id()))
+				.getForObject(this.url + "/{id}", SessionBoundary.class, test_Session.getSessionId()))
 				.isNotNull()
 				.isEqualTo(test_Session);
 		
