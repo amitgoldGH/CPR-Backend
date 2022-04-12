@@ -66,7 +66,7 @@ public class UserTestKit {
 	public void tearDown() {
 		
 		this.client
-		.delete(this.deleteUsersURL, test_Username);
+		.delete(this.url);
 	}
 	
 	//GIVEN
@@ -205,7 +205,7 @@ public class UserTestKit {
 	void testFailedUpdateUser() {
 		boolean thrown = false;
 		
-		NewUserBoundary newUserBoundary=new NewUserBoundary(test_Username, test_Password, "USER");
+		NewUserBoundary newUserBoundary=new NewUserBoundary(test_Username, test_Password, UserRole.USER.name());
 		
 		UserBoundary userBoundary= this.client.postForObject(this.url, newUserBoundary, UserBoundary.class);
 
