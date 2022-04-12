@@ -20,7 +20,7 @@ import CPR.Data.SessionEntity;
 import CPR.Exception.SessionBadRequestException;
 import CPR.Exception.SessionNotFoundException;
 
-@Service
+//@Service
 public class SessionServiceImplMockup implements SessionService{
 
 	private Map<String, SessionEntity> storage;
