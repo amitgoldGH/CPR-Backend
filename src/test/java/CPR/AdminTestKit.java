@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import CPR.Boundary.SampleBoundary;
 import CPR.Boundary.SessionBoundary;
 import CPR.Boundary.UserBoundary;
+import CPR.Data.SessionType;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class AdminTestKit {
@@ -92,8 +93,8 @@ public class AdminTestKit {
 		// I get session boundary array with 2 sessions in it
 	@Test
 	void testGetAllSessions() {
-		SessionBoundary session1 = new SessionBoundary(null, test_Username, measurement_summary, new Date());
-		SessionBoundary session2 = new SessionBoundary(null, test_Username, measurement_summary, new Date());
+		SessionBoundary session1 = new SessionBoundary(null, test_Username, SessionType.CPR.name(), measurement_summary, new Date());
+		SessionBoundary session2 = new SessionBoundary(null, test_Username, SessionType.BVM.name(), measurement_summary, new Date());
 		
 		session1 = this.client.postForObject(this.url_session, session1, SessionBoundary.class);
 		session2 = this.client.postForObject(this.url_session, session2, SessionBoundary.class);
@@ -114,8 +115,8 @@ public class AdminTestKit {
 		// I get session boundary array with 2 sessions in it
 	@Test
 	void testGetAllSessionsByUser() {
-		SessionBoundary session1 = new SessionBoundary(null, test_Username, measurement_summary, new Date());
-		SessionBoundary session2 = new SessionBoundary(null, test_Username, measurement_summary, new Date());
+		SessionBoundary session1 = new SessionBoundary(null, test_Username, SessionType.CPR.name(), measurement_summary, new Date());
+		SessionBoundary session2 = new SessionBoundary(null, test_Username, SessionType.BVM.name(), measurement_summary, new Date());
 		
 		session1 = this.client.postForObject(this.url_session, session1, SessionBoundary.class);
 		session2 = this.client.postForObject(this.url_session, session2, SessionBoundary.class);
@@ -181,8 +182,8 @@ public class AdminTestKit {
 	@Test
 	void testDeleteAllSessions() {
 		
-		SessionBoundary session1 = new SessionBoundary(null, test_Username, measurement_summary, new Date());
-		SessionBoundary session2 = new SessionBoundary(null, test_Username, measurement_summary, new Date());
+		SessionBoundary session1 = new SessionBoundary(null, test_Username, SessionType.CPR.name(), measurement_summary, new Date());
+		SessionBoundary session2 = new SessionBoundary(null, test_Username, SessionType.BVM.name(), measurement_summary, new Date());
 		// POST sessions to server
 		session1 = this.client.postForObject(this.url_session, session1, SessionBoundary.class);
 		session2 = this.client.postForObject(this.url_session, session2, SessionBoundary.class);
