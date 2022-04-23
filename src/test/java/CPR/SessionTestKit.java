@@ -20,6 +20,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import CPR.Boundary.SessionBoundary;
+import CPR.Data.SessionType;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 
@@ -68,7 +69,7 @@ public class SessionTestKit {
 	void testCreateSession() {
 		SessionBoundary test_Session = this.client
 				.postForObject(this.url
-						, new SessionBoundary(null, test_Username, new String[0], new Date())
+						, new SessionBoundary(null, test_Username, SessionType.CPR.name(), new String[0], new Date())
 						, SessionBoundary.class); 
 		
 		assertThat(this.client
@@ -91,7 +92,7 @@ public class SessionTestKit {
 		try {
 			this.client
 			.postForObject(this.url
-					, new SessionBoundary(null, null, new String[0], new Date())
+					, new SessionBoundary(null, null, null, new String[0], new Date())
 					, SessionBoundary.class); 
 			
 		}catch (HttpClientErrorException | HttpServerErrorException httpClientOrServerExc) {
@@ -115,10 +116,11 @@ public class SessionTestKit {
 		//the respond status is 200(OK) and we get updated session boundary
 	@Test
 	void testUpdateSession() {
-		SessionBoundary test_Session = new SessionBoundary(null, test_Username, new String[0], new Date());
+		SessionBoundary test_Session = new SessionBoundary(null, test_Username, SessionType.CPR.name(), new String[0], new Date());
 		test_Session = this.client.postForObject(this.url, test_Session, SessionBoundary.class); // Put in the new id
 		
 		test_Session.setMeasurementSummary(new String[]{"Updated Measure Summary"});
+		test_Session.setType(SessionType.BVM.name());
 		
 		this.client.put(this.url, test_Session);
 		
@@ -140,7 +142,7 @@ public class SessionTestKit {
 	void testFailedUpdateSession() {
 		boolean thrown = false;
 		
-		SessionBoundary test_Session = new SessionBoundary(null, test_Username, new String[0], new Date());
+		SessionBoundary test_Session = new SessionBoundary(null, test_Username, SessionType.CPR.name(), new String[0], new Date());
 		
 		try {
 			this.client.put(this.url, test_Session);
