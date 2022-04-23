@@ -13,6 +13,7 @@ public class SessionConverter {
 
 		sessionBoundary.setSessionId(entity.getSessionId());
 		sessionBoundary.setUsername(entity.getUsername());
+		sessionBoundary.setType(entity.getType().name());
 		sessionBoundary.setMeasurementSummary(entity.getMeasurementSummary());
 		sessionBoundary.setCreationDate(entity.getCreationDate());
 		
@@ -25,6 +26,7 @@ public class SessionConverter {
 
 		sessionEntity.setSessionId(boundary.getSessionId());
 		sessionEntity.setUsername(boundary.getUsername());
+		sessionEntity.setType(SessionType.valueOf(boundary.getType()));
 		sessionEntity.setMeasurementSummary(boundary.getMeasurementSummary());
 		sessionEntity.setCreationDate(boundary.getCreationDate());
 		

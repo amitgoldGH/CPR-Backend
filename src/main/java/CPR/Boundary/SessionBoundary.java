@@ -8,14 +8,16 @@ public class SessionBoundary {
 
 	private String sessionId;
 	private String username;
+	private String type;
 	private String[] measurementSummary; // Calculated at end of session.
 	private Date creation_Date;
 	
 	public SessionBoundary() {}
 	
-	public SessionBoundary(String session_Id, String username, String[] measurement_Summary, Date creation_Date) {
+	public SessionBoundary(String session_Id, String username, String type, String[] measurement_Summary, Date creation_Date) {
 		this.setSessionId(session_Id);
 		this.setUsername(username);
+		this.setType(type);
 		this.setMeasurementSummary(measurement_Summary);
 		this.setCreationDate(creation_Date);
 	}
@@ -32,6 +34,12 @@ public class SessionBoundary {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public String[] getMeasurementSummary() {
 		return measurementSummary;
 	}
@@ -47,13 +55,18 @@ public class SessionBoundary {
 	
 	@Override
 	public String toString() {
-		return "SessionBoundary [sessionId=" + sessionId + ", username=" + username + ", measurementSummary="
-				+ Arrays.toString(measurementSummary) + ", creation_Date=" + creation_Date + "]";
+		return "SessionBoundary [sessionId=" + sessionId + ", username=" + username + ", type=" + type
+				+ ", measurementSummary=" + Arrays.toString(measurementSummary) + ", creation_Date=" + creation_Date
+				+ "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(sessionId, username, measurementSummary, creation_Date);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(measurementSummary);
+		result = prime * result + Objects.hash(creation_Date, sessionId, type, username);
+		return result;
 	}
 	
 	@Override
@@ -65,10 +78,10 @@ public class SessionBoundary {
 		if (getClass() != obj.getClass())
 			return false;
 		SessionBoundary other = (SessionBoundary) obj;
-		return Objects.equals(sessionId, other.sessionId)
-				&& Objects.equals(username, other.username)
+		return Objects.equals(creation_Date, other.creation_Date)
 				&& Arrays.equals(measurementSummary, other.measurementSummary)
-				&& Objects.equals(creation_Date, other.creation_Date);
+				&& Objects.equals(sessionId, other.sessionId) && Objects.equals(type, other.type)
+				&& Objects.equals(username, other.username);
 	}
 	
 	
