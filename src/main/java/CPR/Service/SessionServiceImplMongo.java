@@ -19,6 +19,7 @@ import CPR.Data.IdGeneratorEntity;
 import CPR.Data.SampleEntity;
 import CPR.Data.SessionConverter;
 import CPR.Data.SessionEntity;
+import CPR.Data.SessionType;
 import CPR.Exception.SessionBadRequestException;
 import CPR.Exception.SessionNotFoundException;
 
@@ -42,7 +43,7 @@ public class SessionServiceImplMongo implements SessionService {
 	public void init() {}
 	@Override
 	public Object createSession(SessionBoundary session) {
-		if (session.getUsername() != null) {
+		if (session.getUsername() != null && session.getType() != null) {
 			SessionEntity entity = converter.convertToEntity(session);
 			entity.setCreationDate(new Date());
 			
@@ -60,7 +61,7 @@ public class SessionServiceImplMongo implements SessionService {
 		}
 		else {
 			// TODO: Invalid username
-			throw new SessionBadRequestException("Invalid Username");
+			throw new SessionBadRequestException("Invalid Username or session type");
 		}
 		//return null;
 	}
@@ -99,12 +100,13 @@ public class SessionServiceImplMongo implements SessionService {
 
 	@Override
 	public void updateSession(SessionBoundary session) {
-		if (session.getSessionId() != null && session.getUsername() != null)
+		if (session.getSessionId() != null && session.getUsername() != null && session.getType() != null)
 		{
 			SessionEntity entity = sessionDao.findBySessionId(session.getSessionId());
 			if (entity != null)
 			{
 				entity.setUsername(session.getUsername());
+				entity.setType(SessionType.valueOf(session.getType()));
 				
 				if (session.getMeasurementSummary() != null)
 					entity.setMeasurementSummary(session.getMeasurementSummary());
