@@ -37,7 +37,7 @@ public class UserServiceImplMongo implements UserService {
 	
 	@Override
 	public Object createUser(NewUserBoundary new_User_Boundary) {
-		if (new_User_Boundary.getUsername() != null && new_User_Boundary.getPassword() != null)
+		if (new_User_Boundary.getUsername() != null && !(new_User_Boundary.getUsername().equals("")) && new_User_Boundary.getPassword() != null)
 		{
 			UserEntity entity = userDao.findByUsername(new_User_Boundary.getUsername());
 			if (entity != null)
