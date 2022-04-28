@@ -1,9 +1,6 @@
 package CPR.Service;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
@@ -22,7 +19,6 @@ import CPR.Exception.UserNotFoundException;
 
 @Service
 public class UserServiceImplMongo implements UserService {
-	private Map<String, UserEntity> storage;
 	private UserDao userDao;
 	private UserConverter converter;
 	
@@ -37,7 +33,7 @@ public class UserServiceImplMongo implements UserService {
 	
 	@Override
 	public Object createUser(NewUserBoundary new_User_Boundary) {
-		if (new_User_Boundary.getUsername() != null && !(new_User_Boundary.getUsername().equals("")) && new_User_Boundary.getPassword() != null)
+		if (new_User_Boundary.getUsername() != null && !(new_User_Boundary.getUsername().equals("")) && new_User_Boundary.getPassword() != null && !(new_User_Boundary.getPassword().equals("")))
 		{
 			UserEntity entity = userDao.findByUsername(new_User_Boundary.getUsername());
 			if (entity != null)
