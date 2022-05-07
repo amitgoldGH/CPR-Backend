@@ -60,4 +60,18 @@ public class SessionController {
 		
 		this.sessionService.updateSession(session);
 	}
+	
+	//GET request, path="/api/sessions/calculate/{id}"
+	//Accept: Nothing
+	//Return Session Boundary with updated measurements
+	@RequestMapping(
+			path= "/api/sessions/calculate/{id}",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public Object calculateSessionSummaryById(@PathVariable("id") String session_Id) {
+		System.out.println("SESSION_CONTROLLER /api/sessions/calculate/cpr/" + session_Id + " CALCULATE SESSION SUMMARY BY ID TYPE_GET called");
+		
+		return this.sessionService.calculateSessionSummaryById(session_Id);
+	}
+	
 }

@@ -28,4 +28,6 @@ public interface SessionService {
 	public void deleteSessionById(String session_Id);
 	
 	public void deleteSessionByUsername(String username);
+
+	public Object calculateSessionSummaryById(String session_Id);
 }

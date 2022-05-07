@@ -140,4 +140,10 @@ public class SessionServiceImplMockup implements SessionService{
 		
 	}
 
+	@Override
+	public Object calculateSessionSummaryById(String session_Id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
